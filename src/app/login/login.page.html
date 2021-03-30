@@ -1,0 +1,39 @@
+<ion-content scroll-y="false">
+    <div data-aos="zoom-in">
+      <img src="assets/logo.png" class="logo">
+      <h1 class="judul">SmartClass</h1>
+    </div>
+    <div class="form-login">
+        <label class="title-login">Login</label>
+        <ion-item data-aos="zoom-in"
+        data-aos-delay="50"
+        data-aos-duration="1000">
+          <ion-input
+            autocomplete="off"
+            [(ngModel)]="params.email"
+            placeholder="Masukan email anda"
+            type="email"
+            name="email"
+          ></ion-input>
+        </ion-item>
+        <ion-item data-aos="zoom-in"
+        data-aos-delay="50"
+        data-aos-duration="1000">
+          <ion-input autocomplete="off" placeholder="Masukan password anda" 
+          [(ngModel)]="params.password"
+          [type]="passwordType" name="password"></ion-input>
+          <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+        </ion-item>
+  
+        <br />
+        <!-- <label (click)="presentModalForgetPass()">Lupa password ?</label> -->
+        <ion-row>
+          <ion-col size="12">
+            <ion-button expand="block" color="tertiary" (click)="userLogin()">Masuk </ion-button>
+          </ion-col>
+          <!-- <ion-col size="6">
+            <ion-button expand="block" color="secondary" (click)="selectMenu('login/register')">Registrasi </ion-button>
+          </ion-col> -->
+        </ion-row>
+    </div>
+</ion-content>

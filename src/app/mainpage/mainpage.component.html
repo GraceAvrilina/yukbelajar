@@ -1,0 +1,63 @@
+<ion-menu side="start" menuId="first" content-id="main-content">
+  <ion-content>
+    <div class="header-content">
+      <div>
+        <img
+          (click)="navigate('profile')"
+          src="assets/logo.png"
+          style="width: 33%;"
+          onerror="this.src='assets/default-user.png'"
+        />
+        <h5>{{nama}}</h5>
+      </div>
+    </div>
+    <ion-list>
+      <ion-item (click)="nav('/beranda')" style="cursor: pointer;">
+        <ion-icon slot="start" [name]="'home'"></ion-icon>
+        <ion-label>
+          Beranda
+        </ion-label>
+      </ion-item>
+      <ng-container *ngIf="position == 'WALIKELAS' || position == 'GURU'">
+        <ion-item *ngFor="let p of appPages"  (click)="nav(p.url)" style="cursor: pointer;">
+          <ion-icon slot="start" [name]="p.icon"></ion-icon>
+          <ion-label>
+            {{ p.title }}
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngIf="position == 'ADMSKL'">
+        <ion-item *ngFor="let p of admin_skl"  (click)="nav(p.url)" style="cursor: pointer;">
+          <ion-icon slot="start" [name]="p.icon"></ion-icon>
+          <ion-label>
+            {{ p.title }}
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngIf="position == 'ADMIN'">
+        <ion-item *ngFor="let p of admin"  (click)="nav(p.url)" style="cursor: pointer;">
+          <ion-icon slot="start" [name]="p.icon"></ion-icon>
+          <ion-label>
+            {{ p.title }}
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-container *ngIf="position == 'KS'">
+        <ion-item *ngFor="let p of KS"  (click)="nav(p.url)" style="cursor: pointer;">
+          <ion-icon slot="start" [name]="p.icon"></ion-icon>
+          <ion-label>
+            {{ p.title }}
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ion-item (click)="navigate('/logout')" style="cursor: pointer;">
+        <ion-icon slot="start" [name]="'close-circle'"></ion-icon>
+        <ion-label>
+          Keluar
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet main></ion-router-outlet>

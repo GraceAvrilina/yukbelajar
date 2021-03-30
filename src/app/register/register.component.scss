@@ -1,0 +1,106 @@
+ion-content{
+
+  --ion-background-color:#F2F4F4;
+}
+
+ion-header{
+
+  --ion-background-color:#D6EAF8;
+}
+
+@media only screen and (min-width: 320px){
+//center vertically outer
+.login-content {
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    .bgnya{
+      opacity: 0.3;
+      z-index: -1;
+      display: block;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+    }
+    //center vertically middle/inner
+    .reg-content{
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .passwordIcon{
+      font-size: 1.7rem !important;
+      position: absolute;
+      top: 17px !important;
+      margin: 0 auto !important;
+      z-index: 9;
+      right: 4vw;
+   }
+    
+    ion-card{
+        padding: 15px; 
+        --background: #F2F4F4; 
+        border-radius: 7%;
+        box-shadow: 3px 3px 5px 6px #ccc;
+    }
+    ion-button{
+        --border-radius: 25px;
+        margin-top: 5vh;
+      }
+}
+}
+
+@media only screen and (min-width: 1024px){
+  //center vertically outer
+  .login-content {
+      display: table;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      .bgnya{
+        opacity: 0.3;
+        z-index: -1;
+        display: block;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+      }
+      //center vertically middle/inner
+      .reg-content{
+          display: inline-block;
+          margin: 0 35%;
+          vertical-align: middle;
+      }
+  
+      .passwordIcon{
+        font-size: 1.7rem !important;
+        position: absolute;
+        top: 17px !important;
+        margin: 0 auto !important;
+        z-index: 9;
+        right: 4vw;
+     }
+      
+      ion-card{
+          padding: 15px; 
+          --background: #F2F4F4; 
+          border-radius: 7%;
+          box-shadow: 3px 3px 5px 6px #ccc;
+      }
+      ion-button{
+          --border-radius: 25px;
+          margin-top: 5vh;
+        }
+  }
+  }

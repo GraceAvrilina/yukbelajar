@@ -1,0 +1,96 @@
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start" style="color: #2471A3;">
+        <ion-button mode="md" (click)="close()"><ion-icon name="arrow-back" style="color: #2471A3;"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title style="color: #2471A3;">Data Mata Pelajaran</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <div class="container" *ngIf="position == 'ADMSKL'">
+      <ng-container *ngIf="!isDetail">
+        <div style="margin-left: 3vw;" (click)="selectMenu('export-mapel')">
+          <ion-icon name="add"></ion-icon> Upload dari Excel
+        </div>
+      <ion-card>
+        <ion-card-header>
+          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          <ion-card-title>Entry Data Mata Pelajaran</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label>Nama Sekolah</ion-label>
+            <ion-select [(ngModel)]="data.kodeSkl" name="entryKode">
+              <ion-select-option *ngFor="let item of dataSekolah" [value]="item.kodeSkl">{{item.namaSkl}}</ion-select-option>
+              <!-- <ion-select-option value="dog">Dog</ion-select-option> -->
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Mapel</ion-label>
+            <ion-input clearInput type="text" name="mapel" [(ngModel)]="data.mapel"></ion-input>            
+          </ion-item>
+          <div id="container">
+            <ion-button color="tertiary" (click)="submitData()">Simpan </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-card class="mt-5">
+        <ion-card-header>
+          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          <ion-card-title>List Data Mata Pelajaran</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label>Nama Sekolah</ion-label>
+            <ion-select [(ngModel)]="kdSkl" name="listkode">
+              <ion-select-option *ngFor="let item of dataSekolah" [value]="item.kodeSkl">{{item.namaSkl}}</ion-select-option>
+              <!-- <ion-select-option value="dog">Dog</ion-select-option> -->
+            </ion-select>
+          </ion-item>
+          <div id="container">
+            <ion-button (click)="getList(1)" color="tertiary">Submit </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+      
+      <ion-card *ngIf="isDetail">
+        <ion-card-header>
+          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          <ion-card-title>List Data Mata Pelajaran</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row *ngFor="let item of datamapel">
+              <ion-col size="2">{{item.kd}}</ion-col>
+              <ion-col size="8">{{item.mapel}}</ion-col>
+              <ion-col><ion-icon name="trash" (click)="delData(item)"></ion-icon></ion-col>
+            </ion-row>
+          </ion-grid>
+          <div id="container">
+            <ion-button (click)="getList(0)" color="tertiary">Kembali </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+  </div>
+  
+  <div class="container" *ngIf="position != 'ADMSKL'">
+    
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>List Data Mata Pelajaran</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row *ngFor="let item of datamapel">
+            <ion-col size="2">{{item.kd}}</ion-col>
+            <ion-col size="8">{{item.mapel}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+</div>
+  </ion-content>
+  </div>

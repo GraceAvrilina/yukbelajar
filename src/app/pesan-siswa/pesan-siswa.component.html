@@ -1,0 +1,67 @@
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start" style="color: #2471A3;">
+        <ion-button mode="md" (click)="close()"><ion-icon name="arrow-back" style="color: #2471A3;"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title style="color: #2471A3;">Entry Pesan Siswa</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <div class="container">
+      <ion-card>
+        <ion-card-header>
+          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          <ion-card-title>Kirim Pesan</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <!-- <ion-item>
+            <ion-label>Kirim Pesan Ke:</ion-label>
+            <ion-select [(ngModel)]="data.kelas" name="entryKode" interface="popover">
+              <ion-select-option value="all">Semua Kelas</ion-select-option>
+              <ion-select-option *ngFor="let item of dataKelas" [value]="item.kelas">{{item.kelas}}</ion-select-option>
+            </ion-select>
+          </ion-item> -->
+          <ion-item appable (click)="toogleSection(isOpen)" [ngClass]="{'section-active': isOpen, 'section' : !isOpen}">
+            <ion-label>Kirim Pesan Ke:</ion-label>
+            <ion-icon slot="end" name="arrow-down" *ngIf="!isOpen" style="width: 17px;"></ion-icon>
+            <ion-icon slot="end" name="arrow-up" *ngIf="isOpen" style="width: 17px;"></ion-icon>
+          </ion-item>
+
+          <div >
+            <ion-list>
+              <div *ngIf="isOpen" class="ion-text-justify">
+                <ion-item>
+                  <ion-label><strong>Semua Kelas</strong></ion-label>
+                  <ion-checkbox slot="start" 
+                  [(ngModel)]="masterCheck"
+                  [indeterminate]="isIndeterminate"
+                    (click)="checkMaster($event)"></ion-checkbox>
+                </ion-item>
+              </div>
+            </ion-list>
+            <ion-list *ngFor="let x of dataKelas; let i=index" class="accordion-list" detail="false">
+              <div *ngIf="isOpen" class="ion-text-justify">
+                <ion-item>
+                  <ion-checkbox color="secondary" checked slot="start" [(ngModel)]="x.isChecked" (ionChange)="checkEvent()"></ion-checkbox>
+                  <ion-label>{{x.kelas}}</ion-label>
+                </ion-item>
+              </div>
+            </ion-list>
+          </div>
+
+          <ion-item lines="none">            
+            <ion-label>Isi Pesan:</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-textarea placeholder="Enter more information here..." [(ngModel)]="data.pesan"></ion-textarea>
+          </ion-item>
+          <div id="container">
+            <ion-button color="tertiary" (click)="onSubmit()">Simpan </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      
+  </div>
+  </ion-content>
+  </div>

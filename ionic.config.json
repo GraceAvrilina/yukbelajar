@@ -1,0 +1,8 @@
+{
+  "name": "Smartclass",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "4825dcc2"
+}

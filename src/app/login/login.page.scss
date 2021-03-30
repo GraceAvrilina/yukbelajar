@@ -1,0 +1,151 @@
+ion-content{
+
+  --ion-background-color:#F2F4F4;
+}
+
+@media only screen and (min-width: 320px){
+  .logo{
+      width: 55%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 17%;
+  }
+  .judul{
+    margin-top: -3%;
+    text-align: center;
+    font-size: 250%;
+    font-weight: 600;
+    color: #383838;
+    font-family: ui-monospace;
+  }  
+  
+.form-login {
+  padding: 5% 13%;
+  .scroll-content {
+    overflow: hidden;
+  }
+  .title-app {
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+  img {
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+  }
+  label {
+    text-align: right;
+    display: block;
+    font-size: 0.85rem;
+  }
+  .login2{
+    text-align: center;
+    display: block;
+    font-size: 0.85rem;
+    // font-weight: 500;
+    margin-top: 10px;
+  }
+  ion-button{
+    --border-radius: 25px;
+  }
+  .button-native {
+    padding: 1.2rem 3.2rem;
+    border-radius: 2rem;
+  }
+  .title-login {
+    text-align: left;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #626262;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-top: 5vh;
+  }
+  .passwordIcon{
+    font-size: 1.3rem !important;
+ }
+}
+}
+
+@media only screen and (min-width: 1024px){
+  .logo{
+      width: 20%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 1%;
+  }
+  
+.judul{
+  margin-top: -1%;
+  text-align: center;
+  font-size: 250%;
+  font-weight: 600;
+  color: #383838;
+  font-family: ui-monospace;
+}
+
+.form-login {
+  padding: 5% 33%;
+  .scroll-content {
+    overflow: hidden;
+  }
+  .title-app {
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+  img {
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+  }
+  label {
+    text-align: right;
+    display: block;
+    font-size: 0.85rem;
+  }
+  .login2{
+    text-align: center;
+    display: block;
+    font-size: 0.85rem;
+    // font-weight: 500;
+    margin-top: 10px;
+  }
+  ion-button{
+    --border-radius: 25px;
+  }
+  .button-native {
+    padding: 1.2rem 3.2rem;
+    border-radius: 2rem;
+  }
+  .title-login {
+    text-align: left;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #626262;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-top: 5vh;
+  }
+  .passwordIcon{
+    font-size: 1.3rem !important;
+  //   position: absolute;
+  //   top: 13px !important;
+  //   margin: 0 auto !important;
+  //   z-index: 9;
+  //   right: 4vw;
+ }
+}
+}
+
+.bg{
+  background: rgb(80,209,206);
+background: linear-gradient(90deg, rgba(80,209,206,0.7682423311121324) 23%, rgba(45,144,226,0.7458333675266982) 53%, rgba(221,111,200,0.7682423311121324) 100%);
+}

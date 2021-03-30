@@ -1,0 +1,9 @@
+deploy in apache xampp:
+FIRST OF THE ALL: CHANGE BASE HREF INDEX.HTML INTO -> "./"
+
+
+1. copy the www foldet to htdocs
+2. don't forget the .htaccess
+3. set allow all in httpd.conf apache
+
+https://gist.github.com/julianpoemp/bcf277cb56d2420cc53ec630a04a3566#file-htaccess

@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons (click)="close()" slot="start" style="color: #2471A3;">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="login-content">
+    <!-- <img class="bgnya" src="assets/img/bg2.png"> -->
+  <div class="lgn">
+   <!-- <img class="logo-app" src="{{logo}}" /> -->
+    <div class="form-login">
+      <div>
+        <img src="assets/logo.png" style="width: 40%;">
+      </div>
+      
+    <div class="title">Lupa Password</div>
+    <ion-input type="email" name="email" [(ngModel)]="email" placeholder="Masukan email anda"></ion-input>
+    <button class="custom-btn" shape="round" (click)="send()">KIRIM</button>
+    </div>
+  </div>
+  </div>
+</ion-content>

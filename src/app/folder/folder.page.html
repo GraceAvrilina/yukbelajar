@@ -1,0 +1,21 @@
+<div class="ion-page" id="main-content">
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start" style="color: #2471A3;">
+      <ion-menu-button mode="md" (click)="openFirst()" style="color: #2471A3;"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="color: #2471A3;">Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <img class="bgnya" src="assets/bg.jpg"/>
+  <div id="container">
+    <strong class="capitalize">{{ folder }}</strong>
+    <h1>Selamat Datang di SmartClass</h1>
+    <p>Belajar dengan cerdas dan efisien · <a href="mailto:official.normasolusisistem@gmail.com">official.normasolusisistem@gmail.com</a></p>
+    <p>Welcome {{username}} - {{position}} </p>
+  </div>
+</ion-content>
+</div>

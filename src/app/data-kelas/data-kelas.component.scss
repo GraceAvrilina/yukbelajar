@@ -1,0 +1,51 @@
+ion-menu-button {
+    color: var(--ion-color-primary);
+  }
+  
+  ion-content{
+  
+    --ion-background-color:#F2F4F4;
+  }
+  
+  ion-header{
+  
+    --ion-background-color:#D6EAF8;
+  }
+
+.container{
+  padding: 2rem 3rem;
+}
+
+
+.divider-hash{
+  width: 100%;
+  border-top: 1px dashed #99B;
+  padding-top: 15px;
+  margin-top: 15px;
+
+}
+
+
+#container {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+
+#container a {
+  text-decoration: none;
+}
+
+.tambah{
+  display: block;
+    text-align: right;
+    cursor: pointer;
+}
+
+.tables{
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}

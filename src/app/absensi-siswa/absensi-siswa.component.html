@@ -1,0 +1,85 @@
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start" style="color: #2471A3;">
+        <ion-button mode="md" (click)="close()"><ion-icon name="arrow-back" style="color: #2471A3;"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title style="color: #2471A3;">Entry Absensi</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <ion-card *ngIf="!isEdit">
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Jenis Transaksi</ion-label>
+          <ion-select [(ngModel)]="data.tipe" name="entryKode" interface="popover">
+            <ion-select-option value="absen">Absensi</ion-select-option>
+            <ion-select-option value="spp" *ngIf="position =='ADMSKL'">Biaya Pendidikan</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Kelas</ion-label>
+          <ion-select [(ngModel)]="data.kls" name="entryKode" interface="popover">
+            <ion-select-option *ngFor="let item of dataKelas" [value]="item.kelas">{{item.kelas}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div id="container">
+          <ion-button color="tertiary" (click)="onSubmit(1)">Submit </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="isEdit && isAbsen">
+      <ion-card-header>
+        <ion-card-title class="mb-3">Data Absensi Siswa</ion-card-title>
+        <ion-card-subtitle>{{dataSekolah}} </ion-card-subtitle>
+        <ion-card-subtitle>Kelas {{data.kls}} </ion-card-subtitle>
+        <ion-card-subtitle>Tanggal {{tgl}} </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row *ngFor="let item of dataSiswa; let i = index">
+            <ion-col size="8">
+              <h2 style="font-weight: 700;">{{item.nmssw}}</h2>
+            </ion-col>
+            <ion-col>
+              <ion-select [(ngModel)]="data.absen[i]" name="entryKode" interface="popover">
+                <ion-select-option value="S">Sakit</ion-select-option>
+                <ion-select-option value="I">Ijin</ion-select-option>
+                <ion-select-option value="A">Alpha</ion-select-option>
+              </ion-select>              
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div id="container">
+          <ion-button color="tertiary" (click)="onSubmit(0)">Kembali </ion-button>
+          <ion-button color="tertiary" (click)="onSubmitAbsen(data.absen)">Submit </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card *ngIf="isEdit && isSpp">
+      <ion-card-header>
+        <ion-card-title class="mb-3">Data Pembayaran Dana Pendidikan</ion-card-title>
+        <ion-card-subtitle>{{dataSekolah}} </ion-card-subtitle>
+        <ion-card-subtitle>Kelas {{data.kls}} </ion-card-subtitle>
+        <ion-card-subtitle>Tanggal {{tgl}} </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row *ngFor="let item of dataSiswa; let i = index">
+            <ion-col size="8">
+              <h2 style="font-weight: 700;">{{item.nmssw}}</h2>
+            </ion-col>
+            <ion-col>
+              <ion-input placeholder="Nominal" type="number" [(ngModel)]="nominal[i]"></ion-input>              
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div id="container">
+          <ion-button color="tertiary" (click)="onSubmit(0)">Kembali </ion-button>
+          <ion-button color="tertiary" (click)="onSubmitBayar(nominal)">Submit </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+  </div>

@@ -1,0 +1,102 @@
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start" style="color: #2471A3;">
+        <ion-button mode="md" (click)="close()"><ion-icon name="arrow-back" style="color: #2471A3;"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title style="color: #2471A3;">Setup Auto Info</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <div class="container">
+      <ion-card class="mt-5">
+        <ion-card-header>
+          <ion-card-subtitle>Setup Auto Info</ion-card-subtitle>
+          <ion-card-title>{{dataSekolah}} </ion-card-title>
+        </ion-card-header>
+      <div class="divider-hash"></div>
+
+        <ion-card-content>
+          <ion-list>
+            <ion-item>              
+              <div>Autoinfo Absensi Siswa</div>
+              <div style="display: block;
+              margin-left: auto;">
+              <ion-list radio-group>
+                <!-- <ion-list radio-group [(ngModel)]="case" name="case" required> -->
+                <ion-radio-group >
+                  <ion-item style="display: inline-block;">
+                    <ion-label style="font-size: large;">Aktif</ion-label>
+                    <ion-radio color="primary" checked slot="start" (ionSelect)="selectSpp('aktif',1)"></ion-radio>
+                  </ion-item>
+                  <ion-item style="display: inline-block;">
+                    <ion-label>Tidak Aktif</ion-label>
+                    <ion-radio color="danger" checked slot="start" (ionSelect)="selectSpp('tdkaktif',1)"></ion-radio>
+                  </ion-item>
+              </ion-radio-group>
+              </ion-list>
+              </div>
+              <div style="font-size: small; color: #f4f5f8;">*kosongkan bila ket biaya adalah spp</div>
+            </ion-item>
+            
+            <ion-item>              
+              <div>Autoinfo SPP/Biaya Siswa</div>
+              <div style="display: block;
+              margin-left: auto;">
+              <ion-list>
+                <ion-radio-group >
+                  <ion-item style="display: inline-block;">
+                    <ion-label style="font-size: large;">Aktif</ion-label>
+                    <ion-radio color="primary" checked slot="start" (ionSelect)="selectSpp('aktif',2)"></ion-radio>
+                  </ion-item>
+                  <ion-item style="display: inline-block;">
+                    <ion-label>Tidak Aktif</ion-label>
+                    <ion-radio color="danger" checked slot="start" (ionSelect)="selectSpp('tidakaktif',2)"></ion-radio>
+                  </ion-item>
+              </ion-radio-group>
+              </ion-list>
+              </div>
+              <div style="font-size: small; color: #f4f5f8;">*kosongkan bila ket biaya adalah spp</div>
+            </ion-item>
+            
+            <ion-item>              
+              <div>Keterangan Biaya</div>
+              <div style="display: block;
+              margin-left: auto;">
+                <ion-item style="margin-right: 50px;">
+                  <ion-input></ion-input>
+                </ion-item>
+              </div>
+              <div style="font-size: small; color: red;">*kosongkan bila ket biaya adalah spp</div>
+            </ion-item>
+            
+            <ion-item>              
+              <div>Nilai Biaya</div>
+              <div style="display: block;
+              margin-left: auto;">
+                <ion-item>
+                  <ion-input></ion-input>
+                </ion-item>
+              </div>
+              <div style="font-size: small; color: red;">*kosongkan bila biaya tdk ditampilkan dlm psn</div>
+            </ion-item>
+            
+            <ion-item>              
+              <div style="font-size: smaller;">Info keterlambatan setelah tgl</div>
+              <div style="display: block;
+              margin-left: auto;">
+                <ion-item>
+                  <ion-input></ion-input>
+                </ion-item>
+              </div>
+              <div style="font-size: small; color: #f4f5f8;">*kosongkan bila biaya tdk ditampilkan dlm psn</div>
+            </ion-item>
+        </ion-list>
+        <div id="container">
+          <ion-button color="tertiary" (click)="onSubmit()">Submit </ion-button>
+        </div>
+        </ion-card-content>
+      </ion-card>
+  </div>
+  </ion-content>
+  </div>
