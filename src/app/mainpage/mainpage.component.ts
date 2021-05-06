@@ -64,11 +64,11 @@ export class MainpageComponent implements OnInit {
       url: '/data-kelas',
       icon: 'document-text'
     },
-    // {
-    //   title: 'Data Staff',
-    //   url: '/data-staff',
-    //   icon: 'document-text'
-    // },
+    {
+      title: 'Data Siswa',
+      url: '/data-siswa',
+      icon: 'document-text'
+    },
     {
       title: 'Data Mata Pelajaran',
       url: '/data-mapel',
@@ -100,6 +100,11 @@ export class MainpageComponent implements OnInit {
     {
       title: 'Data Kelas',
       url: '/data-kelas',
+      icon: 'document-text'
+    },
+    {
+      title: 'Data Siswa',
+      url: '/data-siswa',
       icon: 'document-text'
     },
     // {

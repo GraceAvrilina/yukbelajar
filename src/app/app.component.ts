@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
+import * as firebase from 'firebase';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+
+const config = {
+  apiKey: 'AIzaSyAP-kMbX9677JM9G1RgN8rzu8VXu7TnsVc',
+  databaseURL: 'https://yuukbelajar-default-rtdb.firebaseio.com/'
+};
 
 @Component({
   selector: 'app-root',
@@ -51,6 +57,8 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+    
+    firebase.initializeApp(config);
   }
 
   initializeApp() {

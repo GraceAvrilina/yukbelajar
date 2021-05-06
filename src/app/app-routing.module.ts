@@ -35,6 +35,14 @@ const routes: Routes = [
     loadChildren: () => import('./data-mapel/data-mapel.module').then( m => m.DataMapelModule)
   },
   {
+    path: 'data-siswa',
+    loadChildren: () => import('./data-siswa/data-siswa.module').then( m => m.DataSiswaModule)
+  },
+  {
+    path: 'detail-siswa/:id',
+    loadChildren: () => import('./data-siswa/detail-siswa/detail-siswa.module').then( m => m.DetailSiswaModule)
+  },
+  {
     path: 'export-mapel',
     loadChildren: () => import('./data-mapel/export-excel/export-excel.module').then( m => m.ExportExcelModule)
   },

@@ -3,6 +3,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { LoadingController,ToastController, AlertController} from "@ionic/angular";
 import {DataKelasService} from '../../service/data-kelas.service'
 import * as XLSX from 'xlsx';  
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-export-excel',
@@ -54,9 +55,11 @@ export class ExportExcelComponent implements OnInit {
    console.log(arr)  
     arr.forEach(val => {
       delete val.No
-      // this.isidata.kdSkl = val.kdskl
-      // this.isidata.mapel = val.nama_mapel
+      this.isidata.kdSkl = val.kdskl
+      this.isidata.mapel = val.nama_mapel
       this.data.push(val)
+      const newRoomUser = firebase.database().ref('roomusers/').push();
+      newRoomUser.set(this.isidata);
     });
     console.log(this.data)
   }   
@@ -67,7 +70,7 @@ export class ExportExcelComponent implements OnInit {
     const param={
       datanya : this.data
     }
-    console.log(param)
+
     const response = await this.dataKelasService.exportDataMapel(param)
     const { isSuccess, message } = response
 

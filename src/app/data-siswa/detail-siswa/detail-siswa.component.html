@@ -1,0 +1,75 @@
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start" style="color: #2471A3;">
+        <ion-button mode="md" (click)="close()"><ion-icon name="arrow-back" style="color: #2471A3;"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title style="color: #2471A3;">Data Siswa</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <div class="container">
+    <ng-container *ngIf="!isDetail">
+      <ion-card>
+        <ion-card-header>
+          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          <ion-card-title *ngIf="isEdit != 'true'">Hapus Data Siswa</ion-card-title>
+          <ion-card-title *ngIf="isEdit == 'true'">Edit Data Siswa</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of dataSiswa; let i = index">
+                <th scope="row">{{i + 1}} </th>
+                <td>{{item.nmssw}}</td>
+                <td *ngIf="isEdit != 'true'"><a (click)="delSiswaKls(item)" class="btn btn-link"><ion-icon name="trash"></ion-icon></a></td>
+                <td *ngIf="isEdit == 'true'"><a (click)="viewSiswa(item)" class="btn btn-link">Edit</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+
+    
+    <ng-container *ngIf="isDetail">
+      <ion-card>
+        <ion-card-header>
+          <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+          <ion-card-title *ngIf="isEdit == 'true'">Edit Data Siswa</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">NIS</th>
+                <th scope="col">Nama</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of dataDetail; let i = index">
+                <th scope="row">{{i + 1}} </th>
+                <td>{{item.nis}}</td>
+                <td><ion-input type="text" [(ngModel)]="item.nmssw"></ion-input></td>
+                <!-- <td>{{item.nmssw}}</td> -->
+              </tr>
+            </tbody>
+          </table>
+          <div id="container">
+            <ion-button color="tertiary" (click)="submitData(dataDetail)">Simpan </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </div>
+  
+  </ion-content>
+  </div>

@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class LoginService extends BaseService{
-  private url = 'http://127.0.0.1/api/product'
-  // private url = 'https://smartclass.co.id/mobile/api/product'
+  // private url = 'http://127.0.0.1/api/product'
+  private url = 'https://smartclass.co.id/mobile/api/product'
 
   constructor(http: HttpClient) { 
     super(http);

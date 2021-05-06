@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DataKelasService extends BaseService{
-  private url = 'http://127.0.0.1/api/product'
-  // private url = 'https://smartclass.co.id/mobile/api/product'
+  // private url = 'http://127.0.0.1/api/product'
+  private url = 'https://smartclass.co.id/mobile/api/product'
 
   constructor(http: HttpClient) { 
     super(http);
@@ -159,4 +159,43 @@ export class DataKelasService extends BaseService{
     return result;
     
   }
+  
+  async exportDataSiswa(param : any): Promise<any> {
+    const result = await this.post(
+      `${this.url}/export_siswa.php`,
+      param,
+    );
+
+    return result;
+    
+  }
+  
+  async removeSiswa(param : any): Promise<any> {
+    const result = await this.post(
+      `${this.url}/del_siswa.php`,
+      param,
+    );
+
+    return result;
+    
+  }
+   
+  async editSiswa(param : any): Promise<any> {
+    const result = await this.post(
+      `${this.url}/edit_siswa.php`,
+      param,
+    );
+
+    return result;
+    
+  }
+  
+  async detailSiswa(param : any): Promise<any> {
+    let result;
+
+    result = await this.getWithParameter(this.url+ '/selected_siswa.php', param);
+    return result;
+    
+  }
+
 }

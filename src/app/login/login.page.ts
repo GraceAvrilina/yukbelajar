@@ -3,6 +3,7 @@ import { Router, NavigationExtras } from "@angular/router";
 import { ModalController,LoadingController,ToastController,Platform,AlertController } from "@ionic/angular";
 import { ModalLupaPswdComponent } from "../widget/modal-lupa-pswd/modal-lupa-pswd.component";
 import {LoginService} from '../service/login.service'
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-login',
@@ -30,13 +31,26 @@ export class LoginPage implements OnInit {
       password: this.params.password
     };
 
+    firebase.auth().signInWithEmailAndPassword(this.params.email, this.params.password)
+    .then((userCredential) => {
+      // Signed in
+      var user = userCredential.user;
+      var userId= userCredential.user.uid;
+      // console.log(userId)
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage)
+    });
+
     const response = await this.loginservice.userLogin(param);
-    const { isSuccess, message, data , position} = response;
+    const { isSuccess, message, data , position, kdskl, name} = response;
 
     if(isSuccess){
-      localStorage.setItem("name", data.nama);      
+      localStorage.setItem("name", name);      
       localStorage.setItem("position", position);
-      localStorage.setItem("kd_skl", data.kdskl);
+      localStorage.setItem("kd_skl", kdskl);
       this.router.navigate(['/home'])  
     }
     else{
