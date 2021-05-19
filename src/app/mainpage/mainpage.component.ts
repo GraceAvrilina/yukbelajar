@@ -70,6 +70,11 @@ export class MainpageComponent implements OnInit {
       icon: 'document-text'
     },
     {
+      title: 'Data Guru',
+      url: '/data-guru',
+      icon: 'document-text'
+    },
+    {
       title: 'Data Mata Pelajaran',
       url: '/data-mapel',
       icon: 'document-text'
@@ -133,6 +138,29 @@ export class MainpageComponent implements OnInit {
     //   icon: 'document-text'
     // }
    ]
+   
+   public siswa = [
+    {
+      title: 'Ubah Password',
+      url: '/change-password',
+      icon: 'lock-closed'
+    },
+    {
+      title: 'Ujian Online',
+      url: '/list-ujian',
+      icon: 'document-text'
+    },
+    // {
+    //   title: 'Chat Walikelas',
+    //   url: 'https://smartclass.co.id/chatwk/',
+    //   icon: 'chatbubbles'
+    // },
+    // {
+    //   title: 'Chat Dokter',
+    //   url: 'https://smartclass.co.id/chat/',
+    //   icon: 'chatbox'
+    // }
+  ]
   
   public open = false
 

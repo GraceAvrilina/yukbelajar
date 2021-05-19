@@ -41,14 +41,15 @@ export class LoginPage implements OnInit {
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
-      console.log(errorMessage)
+      // console.log(errorMessage)
     });
 
     const response = await this.loginservice.userLogin(param);
-    const { isSuccess, message, data , position, kdskl, name} = response;
+    const { isSuccess, message , position, kdskl, name,email} = response;
 
     if(isSuccess){
       localStorage.setItem("name", name);      
+      localStorage.setItem("email", email);      
       localStorage.setItem("position", position);
       localStorage.setItem("kd_skl", kdskl);
       this.router.navigate(['/home'])  

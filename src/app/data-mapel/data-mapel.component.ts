@@ -46,7 +46,7 @@ export class DataMapelComponent implements OnInit {
     if(isSuccess){
     // this.missLoading()
         this.dataSekolah = data
-        console.log(this.dataSekolah)
+        // console.log(this.dataSekolah)
     }
     else{
       this.presentToast(message)
@@ -65,7 +65,7 @@ export class DataMapelComponent implements OnInit {
     if(isSuccess){
     // this.missLoading()
         this.datamapel = data
-        console.log(this.datamapel)
+        // console.log(this.datamapel)
     }
     else{
       this.presentToast(message)
@@ -118,7 +118,10 @@ export class DataMapelComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['home'])
+    // this.router.navigate(['home'])
+    this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['home']);
+  }); 
   }
   
   async presentToast(message) {

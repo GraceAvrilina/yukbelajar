@@ -7,11 +7,11 @@ import * as firebase from 'firebase';
 import {auth} from 'firebase';
 
 @Component({
-  selector: 'app-data-siswa',
-  templateUrl: './data-siswa.component.html',
-  styleUrls: ['./data-siswa.component.scss'],
+  selector: 'app-data-guru',
+  templateUrl: './data-guru.component.html',
+  styleUrls: ['./data-guru.component.scss'],
 })
-export class DataSiswaComponent implements OnInit {
+export class DataGuruComponent implements OnInit {
 
   fileUploaded: File;  
   worksheet: any;
@@ -51,12 +51,6 @@ export class DataSiswaComponent implements OnInit {
   ) { }
 
 
-  ngOnInit() {
-    this.getSekolah()
-    this.getKelas()
-    this.position = localStorage.getItem("position")
-  }
-  
   uploadedFile(event) {  
     this.fileUploaded = event.target.files[0];  
     this.readExcel();  
@@ -120,19 +114,42 @@ readAsJson() {
   arr.forEach(val => {
     delete val.No
     this.isidata.kodeSekolah = val.kdskl
-    this.isidata.nis = val.nis
+    this.isidata.nis = val.nip
     this.isidata.nama = val.nama
-    this.isidata.kelas = val.kls
+    // this.isidata.kelas = val.kelas
+
     //buat sendiri
     this.isidata.stfup = localStorage.getItem('name')
     let emailnya = val.nama.replace(/\s/g, "").substr(0,4).toLowerCase()
-    this.isidata.email = emailnya+'_'+val.kdskl+'_'+val.nis+'@sci.com'
-    let password = emailnya+val.nis
-    this.isidata.level = 'SISWA'
+    this.isidata.email = emailnya+'_'+val.kdskl+'_'+val.nip+'@sci.com'
+    let password = emailnya+val.nip
+    this.isidata.level = val.level.toUpperCase()
     
     val.stfup = localStorage.getItem('name')
-    val.email = emailnya+'_'+val.kdskl+'_'+val.nis+'@sci.com'
-    val.psswd = emailnya+val.nis
+    val.email = emailnya+'_'+val.kdskl+'_'+val.nip+'@sci.com'
+    val.psswd = emailnya+val.nip
+    val.level= val.level.toUpperCase()
+    
+    if(!val.hasOwnProperty("mapel2")){
+      val.mapel2 = ''
+    }
+    if(!val.hasOwnProperty("mapel3")){
+      val.mapel3 = ''
+    }
+    if(!val.hasOwnProperty("kt")){
+      val.kt = ''
+    }
+    if(!val.hasOwnProperty("nohp")){
+      val.nohp = ''
+    }
+    if(!val.hasOwnProperty("kelas")){
+      val.kelas = ''
+    }
+    else{
+      this.isidata.kelas = val.kelas
+      val.kls = val.kelas
+    }
+
     this.data.push(val)
     
     // register to firebase auth
@@ -141,9 +158,15 @@ readAsJson() {
     // save to realtime dbfirebase 
     const newRoomUser = firebase.database().ref('Users/').push();
     newRoomUser.set(this.isidata);
+
   });
   console.log(this.isidata)
 }   
+ngOnInit() {
+  this.getSekolah()
+  this.getKelas()
+  this.position = localStorage.getItem("position")
+}
 
 async submitData(){
   this.readAsJson()
@@ -152,7 +175,7 @@ async submitData(){
   }
 
   console.log(param)
-  const response = await this.dataKelasService.exportDataSiswa(param)
+  const response = await this.dataKelasService.exportDataGuru(param)
   const { isSuccess, message } = response
 
   if(isSuccess){

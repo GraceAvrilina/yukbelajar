@@ -50,6 +50,14 @@
           </ion-label>
         </ion-item>
       </ng-container>
+      <ng-container *ngIf="position == 'SISWA'">
+        <ion-item *ngFor="let p of siswa"  (click)="nav(p.url)" style="cursor: pointer;">
+          <ion-icon slot="start" [name]="p.icon"></ion-icon>
+          <ion-label>
+            {{ p.title }}
+          </ion-label>
+        </ion-item>
+      </ng-container>
       <ion-item (click)="navigate('/logout')" style="cursor: pointer;">
         <ion-icon slot="start" [name]="'close-circle'"></ion-icon>
         <ion-label>

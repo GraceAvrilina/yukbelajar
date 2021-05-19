@@ -72,6 +72,9 @@ export class EntryTugasComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate(['home'])
+    // this.router.navigate(['home'])
+    this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['home']);
+  }); 
   }
 }

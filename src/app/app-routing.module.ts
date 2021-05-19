@@ -35,6 +35,10 @@ const routes: Routes = [
     loadChildren: () => import('./data-mapel/data-mapel.module').then( m => m.DataMapelModule)
   },
   {
+    path: 'data-guru',
+    loadChildren: () => import('./data-guru/data-guru.module').then( m => m.DataGuruModule)
+  },
+  {
     path: 'data-siswa',
     loadChildren: () => import('./data-siswa/data-siswa.module').then( m => m.DataSiswaModule)
   },
@@ -61,6 +65,14 @@ const routes: Routes = [
   {
     path: 'kirim-tugas',
     loadChildren: () => import('./entry-tugas/entry-tugas.module').then( m => m.EntryTugasModule)
+  },
+  {
+    path: 'list-ujian',
+    loadChildren: () => import('./list-ujian/list-ujian.module').then( m => m.ListUjianModule)
+  },
+  {
+    path: 'list-ujian/ujian/:id',
+    loadChildren: () => import('./list-ujian/ujian/ujian.module').then( m => m.UjianModule)
   }
 ];
 

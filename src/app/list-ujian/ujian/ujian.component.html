@@ -1,0 +1,52 @@
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start" style="color: #2471A3;">
+        <ion-button mode="md" (click)="close()"><ion-icon name="arrow-back" style="color: #2471A3;"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title style="color: #2471A3;">Ujian Online</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <div class="container">
+    <ng-container *ngFor="let val of soal, let i = index">
+      <ion-card *ngIf="(i+1) == number">
+        <!-- <ion-card-header>
+          <ion-card-subtitle>No. {{i+1}} </ion-card-subtitle> -->
+          <!-- <ion-card-title>{{val.soal}} </ion-card-title> -->
+        <!-- </ion-card-header> -->
+        <ion-card-content>
+          <ion-list>
+            <ion-radio-group [value]="val.jwban">
+              <ion-list-header>
+                <ion-label style="font-size: large;"><b>No. {{i+1}} &nbsp; {{val.soal}}</b></ion-label>
+              </ion-list-header>
+            <ion-item>
+              <ion-label>{{val.a}}</ion-label>
+              <ion-radio slot="start" color="tertiary" (click)="select(val.nosoal, i+1, 1)" [value]="val.a"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{val.b}}</ion-label>
+              <ion-radio slot="start" color="tertiary" (click)="select(val.nosoal, i+1, 2)" [value]="val.b"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{val.c}}</ion-label>
+              <ion-radio slot="start" color="tertiary" (click)="select(val.nosoal, i+1, 3)" [value]="val.c"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{val.d}}</ion-label>
+              <ion-radio slot="start" color="tertiary" (click)="select(val.nosoal, i+1, 4)" [value]="val.d"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+          </ion-list>
+          <ion-button style="float: right; margin-bottom: 11px;" color="secondary" [disabled]="number==totalsoal" (click)="next()">Selanjutnya </ion-button>
+          <ion-button style="float: left; margin-bottom: 11px;" color="secondary" [disabled]="number==1" (click)="prev()">Sebelumnya </ion-button>
+          <ion-button style="float: center; margin-bottom: 11px;" color="warning" (click)="saveAnswer()">Simpan Jawaban </ion-button>
+          <!-- <a (click)="next()">Next</a> -->
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+    <ion-button style="float: right; margin-top: 11px; margin-right: 11px;" color="danger" (click)="prev()">Selesai </ion-button>
+  </div>
+  </ion-content>
+  </div>
