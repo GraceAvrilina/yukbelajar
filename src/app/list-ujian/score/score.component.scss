@@ -1,0 +1,122 @@
+ion-menu-button {
+    color: var(--ion-color-primary);
+  }
+  
+  ion-content{
+  
+    --ion-background-color:#F2F4F4;
+  }
+  
+  ion-header{
+  
+    --ion-background-color:#D6EAF8;
+  }
+  
+  @media only screen and (min-width: 320px) and (max-width: 1247px){
+  .container{
+    padding: 2rem 0rem;
+  }
+  }
+  @media only screen and (min-width: 1248px) {
+  .container{
+  padding: 2rem 10rem;
+  }
+  }
+  
+  .divider-hash{
+  width: 100%;
+  border-top: 1px dashed #99B;
+  padding-top: 15px;
+  margin-top: 15px;
+  
+  }
+  
+  
+  #container {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  }
+  
+  
+  #container a {
+  text-decoration: none;
+  }
+
+  
+  .user_card {
+    height: 273px;
+    width: 550px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background: #f7f7f7;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+
+}
+.brand_logo_container {
+    position: absolute;
+    height: 170px;
+    width: 170px;
+    top: -75px;
+    border-radius: 50%;
+    background: #60a3bc;
+    padding: 10px;
+    text-align: center;
+}
+.brand_logo {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+.form_container {
+    margin-top: 100px;
+    padding: 50px;
+}
+.login_btn {
+    width: 100%;
+    background: #c0392b !important;
+    color: white !important;
+}
+.login_btn:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+}
+.login_container {
+    padding: 0 2rem;
+}
+.input-group-text {
+    background: #c0392b !important;
+    color: white !important;
+    border: 0 !important;
+    border-radius: 0.25rem 0 0 0.25rem !important;
+}
+.input_user,
+.input_pass:focus {
+    box-shadow: none !important;
+    outline: 0px !important;
+}
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color: #c0392b !important;
+}
+
+.pp{
+    font-size: 87px;
+    margin-top: 1vh;
+    color: white;
+}
+
+.centerbtn{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}

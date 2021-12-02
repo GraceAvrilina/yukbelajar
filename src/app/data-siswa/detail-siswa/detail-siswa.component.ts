@@ -17,6 +17,7 @@ export class DetailSiswaComponent implements OnInit {
   dataDetail:any
   dataSiswa
   isEdit
+  isPass
   isDetail:boolean=false
 
   datanya:any=[]
@@ -30,6 +31,7 @@ export class DetailSiswaComponent implements OnInit {
     // this.data = this.dtSiswa.dataSiswa
     this.data=this._Activatedroute.snapshot.paramMap.get("id");
     this.isEdit = localStorage.getItem("isEdit")
+    this.isPass = localStorage.getItem("isPass")
     console.log(this.data)
     this.getSiswa()
   }
@@ -126,25 +128,25 @@ async delSiswaKls(item){
 
 async submitData(item){
   console.log(item)
-  const param={
-    kdSkl : localStorage.getItem("kd_skl"),
-    nis : item[0].nis,
-    namaSiswa : item[0].nmssw
-  }
+  // const param={
+  //   kdSkl : localStorage.getItem("kd_skl"),
+  //   nis : item[0].nis,
+  //   namaSiswa : item[0].nmssw
+  // }
 
-  console.log(param)
-  const response = await this.dataKelasService.editSiswa(param)
-  const { isSuccess, message } = response
+  // console.log(param)
+  // const response = await this.dataKelasService.editSiswa(param)
+  // const { isSuccess, message } = response
 
-  if(isSuccess){
-    this.presentToast(message)
-    localStorage.removeItem('isEdit');
-    this.isEdit = false
-    // this.data = []
-  }
-  else{
-    this.presentToast(message)
-  }
+  // if(isSuccess){
+  //   this.presentToast(message)
+  //   localStorage.removeItem('isEdit');
+  //   this.isEdit = false
+  //   // this.data = []
+  // }
+  // else{
+  //   this.presentToast(message)
+  // }
 }
 
 capitalize(word) {
@@ -163,7 +165,10 @@ async presentToast(message) {
 close() {
   // this.router.navigate(['home'])
     this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['home']);
+      this.router.navigate(['home'])
+      // .then(() => {
+      //   window.location.reload();
+      // });
   }); 
 }
 

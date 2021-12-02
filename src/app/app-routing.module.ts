@@ -71,9 +71,53 @@ const routes: Routes = [
     loadChildren: () => import('./list-ujian/list-ujian.module').then( m => m.ListUjianModule)
   },
   {
+    path: 'list-tugas',
+    loadChildren: () => import('./list-tugas/list-tugas.module').then( m => m.ListTugasModule)
+  },
+  {
+    path: 'list-tugas/upload-tugas/:id',
+    loadChildren: () => import('./list-tugas/upload-tugas/upload-tugas.module').then( m => m.UploadTugasModule)
+  },
+  {
+    path: 'belajar-online',
+    loadChildren: () => import('./belajar-online/belajar-online.module').then( m => m.BelajarOnlineModule)
+  },
+  {
+    path: 'belajar-online/detail-belon/:id',
+    loadChildren: () => import('./belajar-online/detail-belon/detail-belon.module').then( m => m.DetailBelonModule)
+  },
+  {
+    path: 'belajar-online/detail-materi/:id',
+    loadChildren: () => import('./belajar-online/detail-materi/detail-materi.module').then( m => m.DetailMateriModule)
+  },
+  {
     path: 'list-ujian/ujian/:id',
     loadChildren: () => import('./list-ujian/ujian/ujian.module').then( m => m.UjianModule)
-  }
+  },
+  {
+    path: 'score/:id',
+    loadChildren: () => import('./list-ujian/score/score.module').then( m => m.ScoreModule)
+  },
+  {
+    path: 'info-sekolah',
+    loadChildren: () => import('./info-sekolah/info-sekolah.module').then( m => m.InfoSekolahModule)
+  },
+  {
+    path: 'info-sekolah',
+    loadChildren: () => import('./info-sekolah/info-sekolah.module').then( m => m.InfoSekolahModule)
+  },
+  {
+    path: 'nilai-sikap',
+    loadChildren: () => import('./nilai-sikap/nilai-sikap.module').then( m => m.NilaiSikapModule)
+  },
+  {
+    path: 'hasil-pts',
+    loadChildren: () => import('./hasil-pts/hasil-pts.module').then( m => m.HasilPtsModule)
+  },
+  {
+    path: 'hasil-pas',
+    loadChildren: () => import('.//hasil-pas/hasil-pas.module').then( m => m.HasilPasModule)
+  },
 ];
 
 @NgModule({

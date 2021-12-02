@@ -48,20 +48,20 @@ export class ExportExcelComponent implements OnInit {
     
   readAsJson() {  
     this.jsonData = XLSX.utils.sheet_to_json(this.worksheet, { raw: false });  
-    this.jsonData = JSON.stringify(this.jsonData).replace(/\s/g, "_");  
-    console.log(this.jsonData)
+    this.jsonData = JSON.stringify(this.jsonData);
+    // console.log(this.jsonData)
     let arr = JSON.parse(this.jsonData)
 
-   console.log(arr)  
+  //  console.log(arr)  
     arr.forEach(val => {
       delete val.No
       this.isidata.kdSkl = val.kdskl
       this.isidata.mapel = val.nama_mapel
       this.data.push(val)
-      const newRoomUser = firebase.database().ref('roomusers/').push();
-      newRoomUser.set(this.isidata);
+      // const newRoomUser = firebase.database().ref('roomusers/').push();
+      // newRoomUser.set(this.isidata);
     });
-    console.log(this.data)
+    // console.log(this.data)
   }   
   ngOnInit() {}
   
@@ -106,7 +106,10 @@ export class ExportExcelComponent implements OnInit {
   close() {
     // this.router.navigate(['home'])
     this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['home']);
+      this.router.navigate(['home'])
+      // .then(() => {
+      //   window.location.reload();
+      // });
   }); 
   }
 }

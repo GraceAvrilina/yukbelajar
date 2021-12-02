@@ -1,0 +1,37 @@
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start" style="color: #2471A3;">
+        <ion-button mode="md" (click)="close()"><ion-icon name="arrow-back" style="color: #2471A3;"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title style="color: #2471A3;">Info Sekolah</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <ion-refresher slot="fixed" style="z-index: 999;" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <div class="container">
+      <ng-container *ngIf="!isEmpty">
+      <ion-card *ngFor="let val of datas">
+        <ion-card-header>
+          <!-- <ion-card-title style="font-size:larger">
+            <ion-icon name="information-circle-outline"></ion-icon> </ion-card-title> -->
+          <ion-card-subtitle style="text-align:center; margin-top: 9px; font-size: medium;"><ion-icon name="calendar"></ion-icon> {{val.tgl}} </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item lines="none" class="ion-text-wrap">{{val.ket}} </ion-item>         
+        </ion-card-content>
+      </ion-card>
+      </ng-container>
+
+      
+      <ng-container *ngIf="isEmpty">
+        <ion-item lines="none" style="margin-top: 15vh;">
+          <p style="text-align: center; width: 100%;">Tidak Ada Info</p>
+          </ion-item>
+      </ng-container>
+  </div>
+  
+  </ion-content>
+  </div>

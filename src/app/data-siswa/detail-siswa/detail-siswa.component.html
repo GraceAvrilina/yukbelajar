@@ -29,8 +29,9 @@
               <tr *ngFor="let item of dataSiswa; let i = index">
                 <th scope="row">{{i + 1}} </th>
                 <td>{{item.nmssw}}</td>
-                <td *ngIf="isEdit != 'true'"><a (click)="delSiswaKls(item)" class="btn btn-link"><ion-icon name="trash"></ion-icon></a></td>
+                <td *ngIf="isEdit != 'true' && isPass !='true'"><a (click)="delSiswaKls(item)" class="btn btn-link"><ion-icon name="trash"></ion-icon></a></td>
                 <td *ngIf="isEdit == 'true'"><a (click)="viewSiswa(item)" class="btn btn-link">Edit</a></td>
+                <td *ngIf="isPass == 'true'"><a (click)="viewSiswa(item)" class="btn btn-link">View</a></td>
               </tr>
             </tbody>
           </table>
@@ -52,19 +53,21 @@
                 <th scope="col">No</th>
                 <th scope="col">NIS</th>
                 <th scope="col">Nama</th>
+                <th scope="col">Password</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of dataDetail; let i = index">
                 <th scope="row">{{i + 1}} </th>
                 <td>{{item.nis}}</td>
-                <td><ion-input type="text" [(ngModel)]="item.nmssw"></ion-input></td>
+                <td><ion-input type="text" [(ngModel)]="item.nama"></ion-input></td>
+                <td>{{item.password}}</td>
                 <!-- <td>{{item.nmssw}}</td> -->
               </tr>
             </tbody>
           </table>
           <div id="container">
-            <ion-button color="tertiary" (click)="submitData(dataDetail)">Simpan </ion-button>
+            <ion-button color="tertiary" (click)="close()">Kembali </ion-button>
           </div>
         </ion-card-content>
       </ion-card>

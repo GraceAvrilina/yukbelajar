@@ -1,0 +1,39 @@
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start" style="color: #2471A3;">
+        <ion-button mode="md" (click)="close()"><ion-icon name="arrow-back" style="color: #2471A3;"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title style="color: #2471A3;">Belajar Online</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <ion-refresher slot="fixed" style="z-index: 999;" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <!-- <ion-item lines="none" style="margin-top: 15vh;">
+      <p style="text-align: center; width: 100%;">Menu Belajar Online masih dalam perbaikan</p>
+    </ion-item> -->
+    
+    <ion-card *ngFor="let val of datamapel let i = index">
+      <a [routerLink]="['detail-belon', val.kd]" style="color:#666666;">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <img src="assets/Icon_Mapel.png" style="width: 100%;">
+            </ion-col>
+            <ion-col size="10">
+              <h2> {{val.mapel}}</h2>
+              <!-- {{val.tglend}} -->
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <!-- <div id="container">
+          <ion-button color="tertiary" [routerLink]="['upload-tugas', val.id]">Upload Tugas </ion-button>
+        </div> -->
+      </ion-card-content>
+    </a>
+    </ion-card>
+  </ion-content>
+  </div>

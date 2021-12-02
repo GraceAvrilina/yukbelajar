@@ -5,6 +5,7 @@ import {DataKelasService} from '../service/data-kelas.service'
 import * as XLSX from 'xlsx';  
 import * as firebase from 'firebase';
 import {auth} from 'firebase';
+// import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'app-data-guru',
@@ -19,6 +20,7 @@ export class DataGuruComponent implements OnInit {
   jsonData: any;   
 
   public data:any = []
+  public dataGuru:any = []
   public isidata:any ={
     kodeSekolah:'',
     namaSekolah:'',
@@ -35,6 +37,7 @@ export class DataGuruComponent implements OnInit {
   isDelKls:boolean = false
   isDelSiswa:boolean = false
   isEdit:boolean = false
+  isPass:boolean = false
   // admin:any
   
   public dataKelas
@@ -46,6 +49,7 @@ export class DataGuruComponent implements OnInit {
     private router:Router,
     // private admin:auth,
     private alertController: AlertController,
+    // private socialSharing: SocialSharing,
     private toastController: ToastController,
     private dataKelasService : DataKelasService
   ) { }
@@ -107,27 +111,28 @@ export class DataGuruComponent implements OnInit {
 readAsJson() {  
   this.jsonData = XLSX.utils.sheet_to_json(this.worksheet, { raw: false });  
   this.jsonData = JSON.stringify(this.jsonData);
-  console.log(this.jsonData)
+  // console.log(this.jsonData)
   let arr = JSON.parse(this.jsonData)
 
- console.log(arr)  
+//  console.log(arr)  
   arr.forEach(val => {
     delete val.No
     this.isidata.kodeSekolah = val.kdskl
-    this.isidata.nis = val.nip
+    this.isidata.nis = val.nip.replace(/\s/g, "")
+    // console.log(this.isidata.nis)
     this.isidata.nama = val.nama
     // this.isidata.kelas = val.kelas
 
     //buat sendiri
     this.isidata.stfup = localStorage.getItem('name')
     let emailnya = val.nama.replace(/\s/g, "").substr(0,4).toLowerCase()
-    this.isidata.email = emailnya+'_'+val.kdskl+'_'+val.nip+'@sci.com'
-    let password = emailnya+val.nip
+    this.isidata.email = emailnya+'_'+val.kdskl+'_'+val.nip.replace(/\s/g, "")+'@sci.com'
+    let password = emailnya+val.nip.replace(/\s/g, "")
     this.isidata.level = val.level.toUpperCase()
     
     val.stfup = localStorage.getItem('name')
-    val.email = emailnya+'_'+val.kdskl+'_'+val.nip+'@sci.com'
-    val.psswd = emailnya+val.nip
+    val.email = emailnya+'_'+val.kdskl+'_'+val.nip.replace(/\s/g, "")+'@sci.com'
+    val.psswd = emailnya+val.nip.replace(/\s/g, "")
     val.level= val.level.toUpperCase()
     
     if(!val.hasOwnProperty("mapel2")){
@@ -147,25 +152,34 @@ readAsJson() {
     }
     else{
       this.isidata.kelas = val.kelas
-      val.kls = val.kelas
+      // val.kls = val.kelas
     }
 
     this.data.push(val)
     
     // register to firebase auth
-    this.registerAuth(this.isidata.email, password)
+    // this.registerAuth(this.isidata.email, password)
     
     // save to realtime dbfirebase 
-    const newRoomUser = firebase.database().ref('Users/').push();
-    newRoomUser.set(this.isidata);
+    // const newRoomUser = firebase.database().ref('Users/').push();
+    // newRoomUser.set(this.isidata);
 
   });
-  console.log(this.isidata)
+  // console.log(this.isidata)
 }   
 ngOnInit() {
   this.getSekolah()
   this.getKelas()
+  this.getGuru()
   this.position = localStorage.getItem("position")
+
+  let contact= '089633382950'
+  let text = "test dr angular"
+  // this.socialSharing.shareViaWhatsAppToReceiver(contact, text, null, null).then(() => {
+  //   console.log("Success!")
+  // }).catch(() => {
+  //   // Error!
+  // });
 }
 
 async submitData(){
@@ -174,7 +188,7 @@ async submitData(){
     datanya : this.data
   }
 
-  console.log(param)
+  // console.log(param)
   const response = await this.dataKelasService.exportDataGuru(param)
   const { isSuccess, message } = response
 
@@ -189,33 +203,32 @@ async submitData(){
     this.isidata = {}
   }
 }
-
-async removeSiswaBySkl(){  
-  const kodeSekolah = localStorage.getItem("kd_skl")
-  
+async getGuru(){
   const param={
-    kdskl : kodeSekolah,
-    tipe : 'persekolah',
-    siswa : '',
-    kelas : ''
+    kdskl : localStorage.getItem("kd_skl")
   }
 
-  const response = await this.dataKelasService.removeSiswa(param)
+  const response = await this.dataKelasService.getGuru(param)
   const { isSuccess, message, data } = response
 
   if(isSuccess){
-    this.presentToast(message)
+    this.dataGuru = data
   }
   else{
     this.presentToast(message)
   }
 
+}
+
+async delGuru(){  
+  const kodeSekolah = localStorage.getItem("kd_skl")
+  
   firebase.database().ref('Users/').once('value', (resp: any) => {
     let data = [];
     data = snapshotToArray(resp);
 
     data.forEach(val => {
-      if(val.kodeSekolah == kodeSekolah && val.level == 'SISWA'){
+      if(val.kodeSekolah == kodeSekolah && val.level == 'GURU'){
         this.datanya.push(val)
       }
     });
@@ -348,6 +361,10 @@ async getKelas(){
 
 }
 
+viewPass(){
+  this.isPass = true
+}
+
 selectMenu(url) {
   // this.router.navigateByUrl(url)
 
@@ -370,7 +387,10 @@ async presentToast(message) {
 close() {
   // this.router.navigate(['home'])
     this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['home']);
+      this.router.navigate(['home'])
+      // .then(() => {
+      //   window.location.reload();
+      // });
   }); 
 }
 

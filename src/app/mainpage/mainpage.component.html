@@ -25,6 +25,18 @@
             {{ p.title }}
           </ion-label>
         </ion-item>
+        <ion-item>
+          <ion-icon slot="start" name="document-text"></ion-icon>
+          <ion-label>
+            <a href="https://smartclass.co.id/jitsi" target="blank" style="color: black;">SmartMeet</a>
+          </ion-label>
+        </ion-item>
+        <ion-item *ngIf="position == 'WALIKELAS'">
+          <ion-icon slot="start" name="document-text"></ion-icon>
+          <ion-label>
+            <a href="https://smartclass.co.id/chatwk" target="blank" style="color: black;">Chat Siswa</a>
+          </ion-label>
+        </ion-item>
       </ng-container>
       <ng-container *ngIf="position == 'ADMSKL'">
         <ion-item *ngFor="let p of admin_skl"  (click)="nav(p.url)" style="cursor: pointer;">
@@ -49,12 +61,36 @@
             {{ p.title }}
           </ion-label>
         </ion-item>
+        <ion-item>
+          <ion-icon slot="start" name="document-text"></ion-icon>
+          <ion-label>
+            <a href="https://smartclass.co.id/jitsi" target="blank" style="color: black;">SmartMeet</a>
+          </ion-label>
+        </ion-item>
       </ng-container>
       <ng-container *ngIf="position == 'SISWA'">
         <ion-item *ngFor="let p of siswa"  (click)="nav(p.url)" style="cursor: pointer;">
           <ion-icon slot="start" [name]="p.icon"></ion-icon>
           <ion-label>
             {{ p.title }}
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon slot="start" name="document-text"></ion-icon>
+          <ion-label>
+            <a href="https://smartclass.co.id/jitsi" target="blank" style="color: black;">SmartMeet</a>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon slot="start" name="document-text"></ion-icon>
+          <ion-label>
+            <a href="https://smartclass.co.id/chatwk" target="blank" style="color: black;">Chat Walikelas</a>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon slot="start" name="document-text"></ion-icon>
+          <ion-label>
+            <a href="https://smartclass.co.id/chat" target="blank" style="color: black;">Chat Dokter</a>
           </ion-label>
         </ion-item>
       </ng-container>

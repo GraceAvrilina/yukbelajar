@@ -1,13 +1,15 @@
 <ion-content scroll-y="false">
+  <ion-refresher slot="fixed" style="z-index: 999;" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+    
     <div data-aos="zoom-in">
       <img src="assets/logo.png" class="logo">
       <h1 class="judul">SmartClass</h1>
     </div>
     <div class="form-login">
         <label class="title-login">Login</label>
-        <ion-item data-aos="zoom-in"
-        data-aos-delay="50"
-        data-aos-duration="1000">
+        <ion-item >
           <ion-input
             autocomplete="off"
             [(ngModel)]="params.email"
@@ -16,9 +18,10 @@
             name="email"
           ></ion-input>
         </ion-item>
-        <ion-item data-aos="zoom-in"
+        <ion-item >
+        <!-- <ion-item data-aos="zoom-in"
         data-aos-delay="50"
-        data-aos-duration="1000">
+        data-aos-duration="1000"> -->
           <ion-input autocomplete="off" placeholder="Masukan password anda" 
           [(ngModel)]="params.password"
           [type]="passwordType" name="password"></ion-input>

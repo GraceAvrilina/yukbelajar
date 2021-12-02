@@ -8,13 +8,18 @@
     </ion-toolbar>
   </ion-header>
   <ion-content [fullscreen]="true">
+    <ion-refresher slot="fixed" style="z-index: 999;" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <div class="container">
       <ng-container *ngIf="noUjian">
         <ion-item lines="none" style="margin-top: 15vh;">
           <p style="text-align: center; width: 100%;">Tidak Ada Ujian</p>
         </ion-item>
       </ng-container>
-      <ion-card *ngFor="let val of listUjian">
+
+      <ng-container *ngFor="let val of listUjian">        
+      <ion-card *ngIf="jamnow < val.wktfinishx && val.done !='done'; else kosong">
         <ion-card-header>
           <ion-card-subtitle>{{val.kduji}}</ion-card-subtitle>
           <ion-card-title>{{val.mapel}} </ion-card-title>
@@ -23,17 +28,24 @@
           <ion-item>
             <ion-grid>
             <ion-row>
-              <ion-col size="6">
-                Tgl: {{val.tglujion}}
+              <ion-col size="12">
+                Tanggal: {{val.tglujion}}
               </ion-col>
+            </ion-row>
+            <ion-row>              
               <ion-col size="6">
                 Mulai: {{val.wktstart}}
               </ion-col>
+              <ion-col size="6">
+                Selesai: {{val.wktfinish}}
+              </ion-col>
             </ion-row>
             <ion-row >
-              <ion-col size="6">
+              <ion-col size="12">
                 Durasi: {{val.tempo}} menit
               </ion-col>
+            </ion-row>
+            <ion-row>              
               <ion-col size="6">
                 Jumlah Soal:{{val.jmlsoal}}
               </ion-col>
@@ -41,11 +53,55 @@
             <!-- testtt --></ion-grid>
           </ion-item>
           <div id="container">
-            <ion-button color="tertiary" *ngIf="jamskrg >= val.wktstart && jamnow <=val.wktfinish" [routerLink]="['ujian', val.kdsoal]">Mulai </ion-button>
-            <ion-button color="tertiary" disabled *ngIf="jamskrg <= val.wktstart ||jamnow >=val.wktfinish">Mulai </ion-button>
+            <ion-button color="tertiary" *ngIf="jamskrg >= val.wktstartx && jamnow <=val.wktfinishx" [routerLink]="['ujian', val.kdsoal]">Mulai </ion-button>
+            <ion-button color="tertiary" disabled *ngIf="jamskrg <= val.wktstartx ||jamnow >=val.wktfinishx">Mulai </ion-button>
           </div>
         </ion-card-content>
       </ion-card>
+      
+      <ng-template #kosong>               
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>{{val.kduji}}</ion-card-subtitle>
+          <ion-card-title>{{val.mapel}} </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-grid>
+            <ion-row>
+              <ion-col size="12">
+                Tanggal: {{val.tglujion}}
+              </ion-col>
+            </ion-row>
+            <ion-row>              
+              <ion-col size="6">
+                Mulai: {{val.wktstart}}
+              </ion-col>
+              <ion-col size="6">
+                Selesai: {{val.wktfinish}}
+              </ion-col>
+            </ion-row>
+            <ion-row >
+              <ion-col size="12">
+                Durasi: {{val.tempo}} menit
+              </ion-col>
+            </ion-row>
+            <ion-row>              
+              <ion-col size="6">
+                Jumlah Soal:{{val.jmlsoal}}
+              </ion-col>
+            </ion-row>
+            <!-- testtt --></ion-grid>
+          </ion-item>
+          <div id="container">
+            <p style="text-align: center; width: 100%;" *ngIf="jamnow > val.wktfinishx">Ujian sudah selesai! </p>
+            <p style="text-align: center; width: 100%;"  *ngIf="val.done=='done'">Ujian sudah dilaksanakan! </p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      </ng-template>
+
+      </ng-container>
       
   </div>
   </ion-content>

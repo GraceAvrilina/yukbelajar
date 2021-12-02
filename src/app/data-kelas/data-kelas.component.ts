@@ -187,6 +187,9 @@ export class DataKelasComponent implements OnInit {
             this.submitForm()
             // this.storageService.clearStorage(() => {
               this.router.navigateByUrl('home')
+              // .then(() => {
+              //   window.location.reload();
+              // });
             // })
           }
         }

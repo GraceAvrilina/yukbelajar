@@ -13,6 +13,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {MainpageComponent} from './mainpage/mainpage.component'
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 
 @NgModule({
   declarations: [AppComponent,MainpageComponent],
@@ -21,6 +22,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    BackButtonDisableModule.forRoot({
+      preserveScrollPosition: true
+    }),
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],

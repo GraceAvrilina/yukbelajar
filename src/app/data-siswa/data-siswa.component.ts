@@ -35,6 +35,7 @@ export class DataSiswaComponent implements OnInit {
   isDelKls:boolean = false
   isDelSiswa:boolean = false
   isEdit:boolean = false
+  isPass:boolean = false
   // admin:any
   
   public dataKelas
@@ -76,20 +77,6 @@ export class DataSiswaComponent implements OnInit {
     readFile.readAsArrayBuffer(this.fileUploaded);  
   } 
   
-  registerAuth(email, password){
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-  .then((userCredential) => {
-    // Signed in 
-    var user = userCredential.user;
-    console.log(user)
-    // ...
-  })
-  .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ..
-  });
-  }
 
   async getSekolah(){
     const param={
@@ -102,7 +89,7 @@ export class DataSiswaComponent implements OnInit {
     if(isSuccess){
     // this.missLoading()
         this.isidata.namaSekolah = data[0].namaSkl
-        console.log(this.isidata.namaSekolah)
+        // console.log(this.isidata.namaSekolah)
     }
     else{
       this.presentToast(message)
@@ -113,10 +100,10 @@ export class DataSiswaComponent implements OnInit {
 readAsJson() {  
   this.jsonData = XLSX.utils.sheet_to_json(this.worksheet, { raw: false });  
   this.jsonData = JSON.stringify(this.jsonData);
-  console.log(this.jsonData)
+  // console.log(this.jsonData)
   let arr = JSON.parse(this.jsonData)
 
- console.log(arr)  
+//  console.log(arr)  
   arr.forEach(val => {
     delete val.No
     this.isidata.kodeSekolah = val.kdskl
@@ -134,16 +121,48 @@ readAsJson() {
     val.email = emailnya+'_'+val.kdskl+'_'+val.nis+'@sci.com'
     val.psswd = emailnya+val.nis
     this.data.push(val)
+
+    // save to realtime dbfirebase 
+    // const newRoomUser = firebase.database().ref('Users/').push();
+    // newRoomUser.set(this.isidata);
+    // let key= '0JQv2bI5UVVN5a8uEg4UjEl6AKG2'
+    // const newRoomUser = firebase.database().ref('User/')
+    // newRoomUser.child(key).set(this.isidata);
     
     // register to firebase auth
-    this.registerAuth(this.isidata.email, password)
+    // this.registerAuth(this.isidata.email, password)
     
-    // save to realtime dbfirebase 
-    const newRoomUser = firebase.database().ref('Users/').push();
-    newRoomUser.set(this.isidata);
   });
-  console.log(this.isidata)
-}   
+  // console.log(this.isidata)
+} 
+
+registerAuth(email, password){
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    // Signed in 
+    var user = userCredential.user;
+    var userId= userCredential.user.uid;
+      
+    firebase.database().ref('Users/').orderByChild('email').equalTo(email).once('value', snapshot => {
+      if (snapshot.exists()) {
+        let rooms = [];
+        rooms = snapshotToArray(snapshot);
+        // console.log(rooms)
+        
+        rooms.forEach(val => {         
+          const tes = firebase.database().ref('Users/' + val.key);
+          // tes.update({stfup: 'DILUC'});
+          tes.update({id: userId});
+        });
+      } 
+    });
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ..
+  });
+  }  
 
 async submitData(){
   this.readAsJson()
@@ -151,7 +170,7 @@ async submitData(){
     datanya : this.data
   }
 
-  console.log(param)
+  // console.log(param)
   const response = await this.dataKelasService.exportDataSiswa(param)
   const { isSuccess, message } = response
 
@@ -257,15 +276,6 @@ async delSiswaKls(item){
     this.isDelKls = false
     this.datanya= []
     
-    // this.confirmDelSswKls()
-    // let dtkls = data.find(x => x.kelas === kelas);
-    // if (dtkls !== undefined) {
-    //   const tes = firebase.database().ref('Users/' + dtkls.key);
-    //   // tes.update({message: 'yahoo'});
-    //   tes.remove()
-    //   this.presentToast("Data Terhapus")
-    //   this.isDelKls = false
-    // }
   });
   
 }
@@ -304,6 +314,11 @@ async confirmDelSswKls() {
 editSiswa(){
   this.isEdit = true
   localStorage.setItem("isEdit", "true")
+}
+
+passSiswa(){
+  this.isPass = true
+  localStorage.setItem("isPass", "true")
 }
 
 async getKelas(){
@@ -347,7 +362,10 @@ async presentToast(message) {
 close() {
   // this.router.navigate(['home'])
     this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['home']);
+      this.router.navigate(['home'])
+      // .then(() => {
+      //   window.location.reload();
+      // });
   }); 
 }
 

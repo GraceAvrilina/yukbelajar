@@ -1,0 +1,43 @@
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <!-- <ion-buttons slot="start" style="color: #2471A3;">
+        <ion-button mode="md" (click)="close()"><ion-icon name="arrow-back" style="color: #2471A3;"></ion-icon></ion-button>
+      </ion-buttons> -->
+      <ion-title style="color: #2471A3;">Hasil Ujian</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <div class="container h-100">
+      <!-- <div class="container h-100"> -->
+        <div class="d-flex justify-content-center" style="margin-top: 17vh;">
+          <div class="user_card">
+            <div class="d-flex justify-content-center">
+              <div class="brand_logo_container">
+                <!-- <img src="http://smartclass.co.id/mobile/assets/logo.png" class="brand_logo" alt="Logo"> -->
+                <p class="pp">{{score}} </p>
+              </div>
+            </div>
+            <div class="justify-content-center form_container">
+              <!-- <form #userlogin = "ngForm" (ngSubmit) = "proseslogin(userlogin.value)"> -->
+                <div class="input-group mb-2">
+                  <p style="text-align: center; width: 100%;"><b>{{nama}}</b></p>
+                </div>
+                <div class="input-group mb-3">
+                  <p style="text-align: center; width: 100%;">Ujian: {{kdUjian}} - {{mapel}}</p>                  
+                </div>
+                  <div class="centerbtn">
+               <button type="submit" name="button" class="btn btn-danger" (click)="done()">KLIK DISINI UNTUK SELESAI UJIAN</button>
+               </div>
+              <!-- </form> -->
+            </div>
+        
+            <div class="mt-4">
+              
+            </div>
+          </div>
+        </div>
+      <!-- </div> -->
+  </div>
+  </ion-content>
+  </div>

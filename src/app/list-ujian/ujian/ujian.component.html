@@ -9,44 +9,82 @@
   </ion-header>
   <ion-content [fullscreen]="true">
     <div class="container">
+      <p style="margin-left: 15px;">Waktu yang tersisa:
+      <countdown [config]="notifyConfig" (event)="handleEvent($event)"></countdown>
+    </p>
+    <div *ngIf="isLinkAva">
+      <div style="height: 200px;">
+      <iframe [src]="link" width="100%" height="320" title="yt" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+      </div>
+      <ion-button style="float: right; margin-bottom: 11px;" color="secondary"  (click)="nextTest()">Selanjutnya </ion-button>
+    </div>
     <ng-container *ngFor="let val of soal, let i = index">
-      <ion-card *ngIf="(i+1) == number">
-        <!-- <ion-card-header>
-          <ion-card-subtitle>No. {{i+1}} </ion-card-subtitle> -->
-          <!-- <ion-card-title>{{val.soal}} </ion-card-title> -->
-        <!-- </ion-card-header> -->
+      <ion-card *ngIf="(i+1) == number && !isLinkAva">
+        <!-- <ion-card *ngIf="(i+1) == number "> -->
         <ion-card-content>
           <ion-list>
             <ion-radio-group [value]="val.jwban">
               <ion-list-header>
-                <ion-label style="font-size: large;"><b>No. {{i+1}} &nbsp; {{val.soal}}</b></ion-label>
+                <!-- tanpa ketsoal & tanpa gambar-->
+                <ion-label *ngIf="val.ketsoal=='' && val.soalimg!= 'https://smartclass'" style="font-size: large;" class="ion-text-wrap"><b>No. {{i+1}} &nbsp; {{val.soal}}</b></ion-label>
+                <!-- dgn ketsoal & tanpa gambar-->
+                <ion-label *ngIf="val.ketsoal!='' && val.soalimg!= 'https://smartclass'" style="font-size: large;" class="ion-text-wrap"><b>{{val.ketsoal}}</b>
+                  <br><br><ion-label>No. {{i+1}} &nbsp; {{val.soal}} </ion-label>
+                </ion-label>
+
+                <!-- tanpa ketsoal & ada gambar-->
+                <ion-label *ngIf="val.ketsoal=='' && val.soalimg== 'https://smartclass'" style="font-size: large;">
+                  <b>No. {{i+1}} &nbsp; <img src="{{val.soal}}" style="width: 50%;"> </b></ion-label>
+                <!-- dgn ketsoal & ada gambar-->
+                <ion-label *ngIf="val.ketsoal!='' && val.soalimg== 'https://smartclass'" style="font-size: large;"><b>{{val.ketsoal}}</b>
+                  <br><br><ion-label>No. {{i+1}} &nbsp;<img src="{{val.soal}}" style="width: 50%;"> </ion-label>
+                </ion-label>
               </ion-list-header>
             <ion-item>
-              <ion-label>{{val.a}}</ion-label>
+              <ion-label *ngIf="val.ax!= 'https://smartclass'" class="ion-text-wrap">{{val.a}}</ion-label>
+              <ion-label *ngIf="val.ax== 'https://smartclass'"><img src="{{val.a}}" style="width: 20%;"> </ion-label>
               <ion-radio slot="start" color="tertiary" (click)="select(val.nosoal, i+1, 1)" [value]="val.a"></ion-radio>
             </ion-item>
             <ion-item>
-              <ion-label>{{val.b}}</ion-label>
+              <ion-label *ngIf="val.bx!= 'https://smartclass'" class="ion-text-wrap">{{val.b}}</ion-label>
+              <ion-label *ngIf="val.bx== 'https://smartclass'"><img src="{{val.b}}" style="width: 20%;"> </ion-label>
               <ion-radio slot="start" color="tertiary" (click)="select(val.nosoal, i+1, 2)" [value]="val.b"></ion-radio>
             </ion-item>
             <ion-item>
-              <ion-label>{{val.c}}</ion-label>
+              <ion-label *ngIf="val.cx!= 'https://smartclass'" class="ion-text-wrap">{{val.c}}</ion-label>
+              <ion-label *ngIf="val.cx== 'https://smartclass'"><img src="{{val.c}}" style="width: 20%;"> </ion-label>
               <ion-radio slot="start" color="tertiary" (click)="select(val.nosoal, i+1, 3)" [value]="val.c"></ion-radio>
             </ion-item>
             <ion-item>
-              <ion-label>{{val.d}}</ion-label>
+              <ion-label *ngIf="val.dx!= 'https://smartclass'" class="ion-text-wrap">{{val.d}}</ion-label>
+              <ion-label *ngIf="val.dx== 'https://smartclass'"><img src="{{val.d}}" style="width: 20%;"> </ion-label>
               <ion-radio slot="start" color="tertiary" (click)="select(val.nosoal, i+1, 4)" [value]="val.d"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label *ngIf="val.ex!= 'https://smartclass'" class="ion-text-wrap">{{val.e}}</ion-label>
+              <ion-label *ngIf="val.ex== 'https://smartclass'"><img src="{{val.e}}" style="width: 20%;"> </ion-label>
+              <ion-radio slot="start" color="tertiary" (click)="select(val.nosoal, i+1, 5)" [value]="val.e"></ion-radio>
             </ion-item>
           </ion-radio-group>
           </ion-list>
           <ion-button style="float: right; margin-bottom: 11px;" color="secondary" [disabled]="number==totalsoal" (click)="next()">Selanjutnya </ion-button>
           <ion-button style="float: left; margin-bottom: 11px;" color="secondary" [disabled]="number==1" (click)="prev()">Sebelumnya </ion-button>
           <ion-button style="float: center; margin-bottom: 11px;" color="warning" (click)="saveAnswer()">Simpan Jawaban </ion-button>
+          <ion-button style="float: right;" color="danger" [routerLink]="['/score', data]">Selesai </ion-button>
           <!-- <a (click)="next()">Next</a> -->
         </ion-card-content>
       </ion-card>
     </ng-container>
-    <ion-button style="float: right; margin-top: 11px; margin-right: 11px;" color="danger" (click)="prev()">Selesai </ion-button>
+    
+    <h2 style="margin-left: 15px;" *ngIf="!isLinkAva">Jawaban:</h2>
+    <ng-container *ngIf="!isLinkAva">
+      <ion-card *ngFor="let val of soal, let i = index">
+        <ion-card-content>
+          {{i+1}}. <div class="biru" style="display: inline-block;" [ngClass]="{'merah': val.jwban == ''}">{{val.jwban == ''? 'Belum Dijawab' : val.jwban}}</div>
+        </ion-card-content>
+      </ion-card>
+  </ng-container>
+    <!-- <ion-button *ngIf="!isLinkAva" style="float: right; margin-top: 11px; margin-right: 11px;" color="danger" [routerLink]="['/score', data]">Selesai </ion-button> -->
   </div>
   </ion-content>
   </div>

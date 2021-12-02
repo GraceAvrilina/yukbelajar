@@ -1,0 +1,58 @@
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start" style="color: #2471A3;">
+        <ion-button mode="md" (click)="close()"><ion-icon name="arrow-back" style="color: #2471A3;"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title style="color: #2471A3;">Hasil PAS</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <ion-refresher slot="fixed" style="z-index: 999;" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <div class="container">
+      <ng-container *ngIf="!isEmpty">
+        <ion-card *ngFor="let val of datas; let i = index">
+          <ion-card-header>
+            <ion-card-title style="font-size:larger"><b>{{val.mpel}}</b> </ion-card-title>
+            <ion-card-subtitle style="text-align:right; margin-top: 9px; font-size: medium;"><ion-icon name="calendar"></ion-icon> {{val.tgl}} </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+  
+            <!-- <ion-item appable id="{{val.trx}}" (click)="toogleSection(isOpen,i)" [ngClass]="{'section-active': isOpen, 'section' : !isOpen}"> -->
+              <ion-label><b>Penilaian Sikap Spiritual</b></ion-label>
+              <!-- <ion-icon slot="end" name="chevron-down-outline" *ngIf="!isOpen" style="width: 17px;"></ion-icon>
+              <ion-icon slot="end" name="chevron-up-outline" *ngIf="isOpen" style="width: 17px;"></ion-icon>
+            </ion-item> -->
+            
+            <!-- <div *ngIf="isOpen" id="{{val.trx}}" class="ion-text-justify"> -->
+            <ion-item lines="none"><ion-icon name="school-outline"></ion-icon>&nbsp; Nilai: {{val.nil1}} </ion-item>
+            <ion-item lines="none"><ion-icon name="star-outline"></ion-icon>&nbsp; Predikat: {{val.pre1}} </ion-item>
+            <ion-item lines="none" class="ion-text-wrap"><ion-icon name="reader-outline"></ion-icon>&nbsp; Deskripsi: {{val.dis1}} </ion-item>
+            <!-- </div> -->
+  
+            <!-- <ion-item appable id="{{val.trx}}" (click)="toogleSection2(isOpen2,i)" [ngClass]="{'section-active': isOpen2, 'section' : !isOpen2}"> -->
+              <ion-label><b>Penilaian Sikap Sosial</b></ion-label>
+              <!-- <ion-icon slot="end" name="chevron-down-outline" *ngIf="!isOpen2" style="width: 17px;"></ion-icon>
+              <ion-icon slot="end" name="chevron-up-outline" *ngIf="isOpen2" style="width: 17px;"></ion-icon> -->
+            <!-- </ion-item> -->
+  
+            <!-- <div *ngIf="isOpen2" id="{{val.trx}}" class="ion-text-justify"> -->
+              <ion-item lines="none"><ion-icon name="school-outline"></ion-icon>&nbsp; Nilai: {{val.nil2}} </ion-item>
+              <ion-item lines="none"><ion-icon name="star-outline"></ion-icon>&nbsp; Predikat: {{val.pre2}} </ion-item>
+              <ion-item lines="none" class="ion-text-wrap"><ion-icon name="reader-outline"></ion-icon>&nbsp; Deskripsi: {{val.dis2}} </ion-item>
+            <!-- </div> -->
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+      
+      <ng-container *ngIf="isEmpty">
+        <ion-item lines="none" style="margin-top: 15vh;">
+          <p style="text-align: center; width: 100%;">Tidak Ada Penilaian</p>
+        </ion-item>
+      </ng-container>
+  </div>
+  
+  </ion-content>
+  </div>

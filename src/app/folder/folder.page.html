@@ -10,12 +10,36 @@
 
 <ion-content [fullscreen]="true">
 
+  <ion-refresher slot="fixed" style="z-index: 999;" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <img class="bgnya" src="assets/bg.jpg"/>
   <div id="container">
     <strong class="capitalize">{{ folder }}</strong>
-    <h1>Selamat Datang di SmartClass</h1>
-    <p>Belajar dengan cerdas dan efisien · <a href="mailto:official.normasolusisistem@gmail.com">official.normasolusisistem@gmail.com</a></p>
+    <h1>Selamat Datang di <br> {{nmskl}} </h1>
+    <p>Belajar dengan cerdas dan efisien · <a href="mailto:official.megasolusisistem@gmail.com">official.megasolusisistem@gmail.com</a></p>
     <p>Welcome {{username}} - {{position}} </p>
+
+    <ion-item style="margin-top: 15px;" *ngIf="!isAbsen && level=='SISWA'">
+      <ion-label>Absensi untuk tgl {{tglskrg}}:</ion-label>
+      <!-- <ion-label>Pilih </ion-label> -->
+      <ion-select [(ngModel)]="absensi" value="absensi" interface="action-sheet">
+        <ion-select-option value="H">Hadir</ion-select-option>
+        <ion-select-option value="S">Sakit</ion-select-option>
+        <ion-select-option value="I">Ijin</ion-select-option>
+        <!-- <ion-select-option value="mute_year">Mute for a year</ion-select-option> -->
+      </ion-select>
+    </ion-item>
+    <ion-button *ngIf="!isAbsen && level=='SISWA'" color="secondary" size="small" (click)="onSubmit()">Simpan</ion-button>
+    
+    <ion-item style="margin-top: 15px;" *ngIf="isAbsen && level=='SISWA'">
+      <ion-label *ngIf="isAdaAbsen" class="ion-text-wrap">Absensi untuk tgl {{tglskrg}}: {{msg}}</ion-label>
+      <ion-label *ngIf="!isAdaAbsen" class="ion-text-wrap">{{pesan}}</ion-label>
+      <!-- <ion-label>Pilih </ion-label> -->
+    </ion-item>
   </div>
+
+  
 </ion-content>
 </div>
